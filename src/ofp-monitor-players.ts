@@ -2,7 +2,7 @@ import { LitElement, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
 @customElement("ofp-monitor-players")
-export default class OfpMonitorPlayers extends LitElement {
+export class OfpMonitorPlayers extends LitElement {
   @property({ type: Array }) playerNames = [];
   @property({ type: Number }) numPlayers = 0;
   @property({ type: Number }) maxPlayers = 0;
