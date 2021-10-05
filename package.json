@@ -4,15 +4,18 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "test": "wtr --node-resolve"
   },
   "dependencies": {
-    "@esm-bundle/chai": "4.3.4-fix.0",
+    "@esm-bundle/chai": "^4.3.4-fix.0",
     "fetch-mock": "9.11.0",
     "lit": "2.0.0-rc.4",
     "parcel-bundler": "^1.6.1"
   },
   "devDependencies": {
+    "@web/dev-server-esbuild": "^0.2.14",
+    "@web/test-runner": "^0.13.18",
     "typescript": "4.2.3"
   },
   "resolutions": {

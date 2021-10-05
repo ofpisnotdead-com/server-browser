@@ -1,5 +1,5 @@
 import { expect } from "@esm-bundle/chai";
-import fetchMock from "fetch-mock";
+import fetchMock from "fetch-mock/esm/client.js";
 import MasterServer from "./master-server";
 import OfpServer from "./ofp-server";
 
