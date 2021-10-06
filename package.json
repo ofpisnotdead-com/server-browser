@@ -8,12 +8,12 @@
     "test": "wtr --node-resolve"
   },
   "dependencies": {
-    "@esm-bundle/chai": "^4.3.4-fix.0",
-    "fetch-mock": "9.11.0",
-    "lit": "2.0.0",
-    "parcel-bundler": "^1.6.1"
+    "lit": "2.0.0"
   },
   "devDependencies": {
+    "parcel-bundler": "^1.6.1",
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "fetch-mock": "9.11.0",
     "@open-wc/testing": "^3.0.0-next.5",
     "@web/dev-server-esbuild": "^0.2.14",
     "@web/test-runner": "^0.13.18",
