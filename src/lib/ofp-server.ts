@@ -79,20 +79,22 @@ export default class OfpServer {
 
   async refresh() {
     this.loaded = false;
-    let response = await fetch(this.serverApiUrl);
-    if (response.status === 200) {
-      let json = await response.json();
-      this.payload = json;
-      if (this.payload) {
-        this.players = parseInt(this.payload.numplayers, 10);
+    try {
+      let response = await fetch(this.serverApiUrl).catch((e) => console.warn(e));
+      if (response.status === 200) {
+        let json = await response.json();
+        this.payload = json;
+        if (this.payload) {
+          this.players = parseInt(this.payload.numplayers, 10);
+        }
+        this.error = false;
+      } else {
+        this.payload = null;
+        this.error = true;
       }
-      this.error = false;
-    } else {
-      this.payload = null;
-      this.error = true;
-    }
 
-    this.loaded = true;
+      this.loaded = true;
+    } catch {};
 
     return this;
   }

@@ -14,6 +14,7 @@ export default class extends LitElement {
   @state() servers: OfpServer[] = [];
   @state() loading: boolean = false;
   @state() autoRefresh: boolean = true;
+  @state() online: boolean = true;
 
   connectedCallback() {
     super.connectedCallback();
@@ -22,19 +23,33 @@ export default class extends LitElement {
       this.autoRefresh = false;
     }
 
+    if (navigator.connection) {
+      this.updateConnection();
+      navigator.connection.addEventListener('change', () => this.updateConnection());
+    }
+
     this.masterServer = new MasterServer(this.masterServerUrl);
     this.reloadServers();
   }
 
-  scheduleRefresh() {
+  updateConnection() {
+    if(this.online != navigator.onLine) {
+      this.online = navigator.onLine;
+      if(this.online) this.scheduleRefresh(0);
+    }
+  }
+
+  scheduleRefresh(delay = 5000) {
     if (this.autoRefresh) {
       setTimeout(() => {
         this.refreshServers();
-      }, 5000);
+      }, delay);
     }
   }
 
   reloadServers() {
+    if (!this.online) return;
+
     this.servers = [];
     this.loading = true;
     this.masterServer.loadServers().then((servers) => {
@@ -53,6 +68,8 @@ export default class extends LitElement {
   }
 
   refreshServers() {
+    if (!this.online) return;
+
     this.loading = true;
     let loaders = this.servers.map((server) => server.refresh());
     loaders.forEach((loader) => {
@@ -85,6 +102,10 @@ export default class extends LitElement {
   }
 
   render() {
+    if(!this.online) {
+      return html`<center><h1>You're offline</h1></center>`;
+    }
+
     return html`
       <progress
         max="${this.masterServer.servers.length}"
@@ -103,12 +124,12 @@ export default class extends LitElement {
           `
         : ""}
 
-      <h3>
+      <aside class="info">
         Found ${this.servers.length} servers.
         <br /><i
           >TIP: Click on players column to see list of players on server.</i
         >
-      </h3>
+      </aside>
 
       <table>
         <thead>
@@ -168,6 +189,12 @@ export default class extends LitElement {
   }
 
   static styles = css`
+    .info {
+      font-size: 1.17em;
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
     a {
       color: inherit;
     }
@@ -225,9 +252,6 @@ export default class extends LitElement {
     }
     th.ColumnPing {
       width: 8%;
-    }
-    td.Players {
-      cursor: help;
     }
 
     .IP {

@@ -1,0 +1,26 @@
+{
+  "name": "OFP Monitor",
+  "short_name": "OFP Monitor",
+  "icons": [{
+      "src": "images/Icon_128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable"
+    }, {
+      "src": "images/Icon_256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    }, {
+      "src": "images/Icon_256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    }],
+  "lang": "en-US",
+  "display": "standalone",
+  "background_color": "black",
+  "theme_color": "black",
+  "start_url": "/",
+  "scope": "."
+}

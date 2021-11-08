@@ -1,4 +1,4 @@
-import { LitElement, html } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 
 @customElement("ofp-monitor-players")
@@ -13,6 +13,12 @@ export class OfpMonitorPlayers extends LitElement {
       ${this.playerNames.map((player) => html`${player}<br />`)}
     </p>`;
   }
+
+  static styles = css`
+    div {
+      cursor: help;
+    }
+  `;
 
   render() {
     return html`
